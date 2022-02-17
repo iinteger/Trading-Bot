@@ -39,7 +39,7 @@ def set_target_price(bithumb, ticker):
         target_price = price_per_unit * 1.05
         stoploss_price = price_per_unit * 0.96
 
-    stop_buy_price = price_per_unit * 1.03
+    stop_buy_price = price_per_unit * 1.01
 
 
     if target_price < 1:
@@ -109,6 +109,11 @@ def main(ticker, balance):
     while True:
         try:
             now = datetime.datetime.now()
+            if bithumb.get_balance(ticker)[2] < 10000:
+                print("자산 부족")
+                time.sleep(10)
+                continue
+
             # 정기 매매
             if mid <= now < mid + datetime.timedelta(seconds=20):
                 print("\n\n{} 정기 매수=========================================".format(ticker))
@@ -154,8 +159,10 @@ def main(ticker, balance):
                 print("목표가 :", target_price)
 
             time.sleep(5)
+
             # 매도
-            if pybithumb.get_current_price(ticker) > target_price and bithumb.get_balance(ticker)[0] > 10:
+            RSI = get_RSI(ticker)[-1]
+            if (pybithumb.get_current_price(ticker) > target_price or RSI >= 70) and bithumb.get_balance(ticker)[0] > 10:
                 unit = bithumb.get_balance(ticker)[0]
                 bithumb.sell_market_order(ticker, unit)
 
