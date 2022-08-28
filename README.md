@@ -258,3 +258,13 @@
 - 클래스 기반으로 수정
 - portfolio analyze.ipynb 코드에 주기 리밸런싱 기능 추가. 리밸런싱 여부와 실행 월을 입력하여 사용 가능
 - 주기 리밸런싱 대신 밴드 리밸런싱을 하는 코드 구현 (portfolio analyze band rebalancing.ipynb). 기준 종목 인덱스와 허용 밴드폭을 설정하여 사용 가능
+
+
+<div>
+</br>
+</div>
+
+## 22. 08. 28
+
+- portfolio analyze.ipynb 코드를 클래스 기반으로 리팩토링
+- 샤프지수 추가
